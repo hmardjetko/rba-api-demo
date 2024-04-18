@@ -16,6 +16,7 @@ public class NewCardRequest   {
   @NotBlank(message = "Last name is required")
   private String lastName;
 
+  @NotBlank(message = "Status is required")
   @JsonProperty("status")
   private String status;
 

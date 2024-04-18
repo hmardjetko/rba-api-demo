@@ -93,7 +93,10 @@ public class CardRequestService {
             CardRequestStatusUpdateRequest cardRequestStatusUpdate = mapper.readValue(message, CardRequestStatusUpdateRequest.class);
             CardRequest cardRequest = cardRequestRepository.findById(Long.valueOf(cardRequestStatusUpdate.getRequestId())).orElse(null);
             if (cardRequest == null) {
-                logger.error("Card request with ID: {} doesn't exist", cardRequestStatusUpdate.getRequestId() );
+                logger.error("Card request with ID: {} doesn't exist", cardRequestStatusUpdate.getRequestId());
+            } else if (CardRequestStatus.APPROVED.equals(cardRequest.getCardRequestStatus())
+                        || CardRequestStatus.DECLINED.equals(cardRequest.getCardRequestStatus())) {
+                logger.error("Card request with ID: {} is closed and status cannot be updated to {}", cardRequestStatusUpdate.getRequestId(), cardRequestStatusUpdate.getStatus());
             } else {
                 cardRequest.setDescription(cardRequestStatusUpdate.getDescription());
                 cardRequest.setUpdated(LocalDateTime.now());

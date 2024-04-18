@@ -4,7 +4,6 @@ import com.example.rba.model.CardRequest;
 import com.example.rba.model.CardRequestStatusUpdateRequest;
 import com.example.rba.model.NewCardRequest;
 import com.example.rba.model.Response;
-import com.example.rba.model.enums.CardRequestStatus;
 import com.example.rba.repository.CardRequestRepository;
 import com.example.rba.service.CardRequestService;
 import jakarta.validation.Valid;
